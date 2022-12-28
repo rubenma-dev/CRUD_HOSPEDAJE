@@ -1,0 +1,132 @@
+<?php
+include 'db.php';
+
+$conexiondb = conectardb();
+$id_categoria = $_GET['id_categoria'];
+$query = "SELECT * FROM categorias where id_categoria=". $id_categoria;
+$resultado = mysqli_query($conexiondb, $query);
+$categoria = mysqli_fetch_row($resultado);
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones</title>
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/registrar.css">
+    <link rel="stylesheet" href="CSS/listado.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="./IMG/logo.svg" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="IMG/logo.svg" alt="">
+            </div>
+
+            <span class="logo_name">HOTEL</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                        <i class="uil uil-calendar-alt"></i>
+                        <span class="link-name">Reservas</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-clipboard-notes"></i>
+                        <span class="link-name">Recepción</span>
+                    </a></li>
+                <li><a href="">
+                        <i class="uil uil-bed"></i>
+                        <span class="link-name">Habitación</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-file-graph"></i>
+                        <span class="link-name">Reportes</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-coffee"></i>
+                        <span class="link-name">Productos</span>
+                    </a></li>
+                <li><a href="../listado/form_cuentas.php">
+                        <i class="uil uil-setting"></i>
+                        <span class="link-name">Configuración</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Cerrar Sesión</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Modo Oscuro</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+            <img src="IMG/admin.svg" alt="">
+        </div>
+
+        <div class="dash-content">
+            <div class="topnav" id="myTopnav">
+                <a href="listado_habitacion.php">Habitaciones Existentes</a>
+                <a href="index.php">Registrar Habitacion</a>
+                <a href="listado_categoria.php">Listado Categoria</a>
+                <a href="categoria.php">Registrar Categorias</a>
+            </div>
+            <div class="signupFrm">
+                <form action="./update_categoria.php" method="POST" class="form_categoria">
+                    <h3 class="title">Editar Categoria</h3>
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder="a" name="nombre" value='<?php echo $categoria[1]; ?>'>
+                        <label for="" class="label">Nombre Categoria</label>
+                    </div>
+                    <div class="inputContainer">
+                        <input type="text" class="input" placeholder="a" name="piso" value='<?php echo $categoria[2]; ?>'>
+                        <label for="" class="label">Ingrese Piso</label>
+                    </div>
+                    <div class="inputContainer">
+                        <input type="number" class="input" placeholder="a" name="tarifa" value='<?php echo $categoria[3]; ?>'>
+                        <label for="" class="label">Ingrese Tarifa</label>
+                    </div>
+                    <input type="hidden" name="categoria" id="" value='<?php echo $categoria[0] ?>' readonly>
+                    <input type="hidden" name="editar" id="" value='si' readonly>
+                    <input type="submit" class="submitBtn" value="GUARDAR">
+                </form>
+            </div>
+    </section>
+
+    <script src="../../JS/script.js"></script>
+
+</body>
+
+</html>

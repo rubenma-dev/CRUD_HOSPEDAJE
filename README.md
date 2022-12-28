@@ -1,2 +1,2 @@
-# CRUD_HOSPEDAJE
-Sistema PHP para la gestion de un hospedaje.
+# crud_relacionado
+Crud Relacionado en PHP
